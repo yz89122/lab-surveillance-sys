@@ -18,14 +18,14 @@ def main():
         pass
 
     video_capture = cv2.VideoCapture('rtsp://' + host + ':' + port + '/medias2')
-    print(video_capture.isOpened())
 
-    if video_capture.isOpened():
-        while video_capture.isOpened():
-            ret, frame = video_capture.read()
-            cv2.imshow('img', frame)
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
+    if not video_capture.isOpened():
+        video_capture.open()
+    while video_capture.isOpened():
+        ret, frame = video_capture.read()
+        cv2.imshow('img', frame)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
 
 
 if __name__ == '__main__':
