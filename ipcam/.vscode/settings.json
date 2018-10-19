@@ -1,0 +1,3 @@
+{
+    "python.pythonPath": "${workspaceFolder}/ipcam/bin/python3",
+}
