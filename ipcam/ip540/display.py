@@ -8,16 +8,20 @@ import sys
 def main():
     try:
         host = sys.argv[1]
-        port = str(554)
     except:
-        print('Usage: python3 ', sys.argv[0], ' <hostname> [port]')
+        print('Usage: python3 ', sys.argv[0], ' <hostname> [port] [s1/s2]')
         exit(1)
+    port = str(554)
+    stream = 's1'
     try:
         port = sys.argv[2]
+        stream = sys.argv[3]
+        if stream != 's1' or stream != 's2':
+            print('option stream should be s1 or s2')
     except:
         pass
 
-    video_capture = cv2.VideoCapture('rtsp://' + host + ':' + port + '/medias2')
+    video_capture = cv2.VideoCapture('rtsp://' + host + ':' + port + '/medias1')
 
     if not video_capture.isOpened():
         video_capture.open()
