@@ -1,6 +1,7 @@
 #! /bin/bash
 
 ESC=$(echo -ne '\x1b')
+EOT=$(echo -ne '\x04')
 
 # if the arguments doesn't satisfied
 if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]
@@ -42,23 +43,25 @@ move_speed=10
 
 send_move_command() {
     # prints message
-    echo sending move signal $move_direction
+    echo -n "sending move signal $move_direction... "
     # web interface provided by the camera
     curl "$HOST:$PORT/cgi-bin/view/cammove.cgi?move=$move_direction" \
             --user "$USER:$PASS" 1>/dev/null \
             1>/dev/null \
             2>/dev/null \
+        && echo done \
         || echo error when sending command
 }
 
 send_set_speed_command() {
     [ $move_speed -gt 10 ] && move_speed=10
     [ $move_speed -lt 1 ] && move_speed=1
-    echo setting move speed to $move_speed
+    echo -n "setting move speed to $move_speed... "
     curl "$HOST:$PORT/cgi-bin/view/ptzspeed.cgi?speed=$move_speed" \
             --user "$USER:$PASS" 1>/dev/null \
             1>/dev/null \
             2>/dev/null \
+        && echo done \
         || echo error when sending command
 }
 
@@ -105,7 +108,8 @@ echo 'Ctrl+C to end this script'
 
 while :
 do
-    read -sN1 k1
+    read -sN1 k1 || { echo EOF ; exit 0 ; }
+    [ "$k1" = $EOT ] && { echo EOT ; exit 0 ; }
     if [ "$k1" = "$ESC" ]
     then
         # read the remaining characters
