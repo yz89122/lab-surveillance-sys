@@ -91,14 +91,18 @@ parse_command() {
     do
         cmd+=($part)
     done
-    if [ ${cmd[0]} = 'speed' ]
-    then
-        move_speed=${cmd[1]}
-        send_set_speed_command
-    else
-        echo unkown command
-    fi
+    case ${cmd[0]} in
+        'speed')
+            move_speed=${cmd[1]}
+            send_set_speed_command
+            ;;
+        *)
+            echo 'unknown command'
+            ;;
+    esac
 }
+
+trap 'echo Ctrl+C detected ; exit ;' 2
 
 # tell user how to use this script
 echo 'Press arrow key or NumPad to control the rotating direction'
@@ -108,12 +112,12 @@ echo 'Ctrl+C to end this script'
 
 while :
 do
-    read -sN1 k1 || { echo EOF ; exit 0 ; }
-    [ "$k1" = $EOT ] && { echo EOT ; exit 0 ; }
+    read -sN1 k1 || { echo EOF ; break ; }
+    [ "$k1" = $EOT ] && { echo EOT ; break ; }
     if [ "$k1" = "$ESC" ]
     then
         # read the remaining characters
-        read -sN2 k2
+        read -sN2 k2 || { echo EOF ; break ; }
         # translate key to actual control code
         arrow_key_to_code $k1$k2
         send_move_command
@@ -131,7 +135,7 @@ do
     elif [[ "$k1" =~ ^[a-z]$ ]]
     then
         echo -n "$k1"
-        read k2
+        read k2 || { echo EOF ; break ; }
         parse_command "$k1$k2"
     else
         echo unkown command
