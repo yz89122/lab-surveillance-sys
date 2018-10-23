@@ -43,7 +43,7 @@ move_speed=10
 
 send_move_command() {
     # prints message
-    echo -n "sending move signal $move_direction... "
+    echo -n "sending move signal [$move_direction]... "
     # web interface provided by the camera
     curl "$HOST:$PORT/cgi-bin/view/cammove.cgi?move=$move_direction" \
             --user "$USER:$PASS" 1>/dev/null \
@@ -58,6 +58,16 @@ send_set_speed_command() {
     [ $move_speed -lt 1 ] && move_speed=1
     echo -n "setting move speed to $move_speed... "
     curl "$HOST:$PORT/cgi-bin/view/ptzspeed.cgi?speed=$move_speed" \
+            --user "$USER:$PASS" 1>/dev/null \
+            1>/dev/null \
+            2>/dev/null \
+        && echo done \
+        || echo error when sending command
+}
+
+send_reset_home() {
+    echo -n 'sending reset home... '
+    curl "$HOST:$PORT/cgi-bin/ptzcontrol/resethome.cgi" \
             --user "$USER:$PASS" 1>/dev/null \
             1>/dev/null \
             2>/dev/null \
@@ -95,6 +105,17 @@ parse_command() {
         'speed')
             move_speed=${cmd[1]}
             send_set_speed_command
+            ;;
+        'patrol')
+            move_direction='patrol'
+            send_move_command
+            ;;
+        'calibrate')
+            move_direction='InitPtz'
+            send_move_command
+            ;;
+        'resethome')
+            send_reset_home
             ;;
         *)
             echo 'unknown command'
