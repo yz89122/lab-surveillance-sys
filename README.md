@@ -13,7 +13,7 @@ pip install -r requirements.txt
 We need to create a virtual environment at the first time.
 
 > It's fine if you wanna install those things globally.
-> I suggest you to create a virtual environment if you don't want to mess your computer :)
+> I suggest you to create a virtual environment if you don't want to mess your environment up :)
 
 ```bash
 python3 -m venv python
