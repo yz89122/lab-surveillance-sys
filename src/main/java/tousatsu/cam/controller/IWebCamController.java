@@ -1,4 +1,4 @@
-package tousatsu.cam;
+package tousatsu.cam.controller;
 
 import java.io.IOException;
 
