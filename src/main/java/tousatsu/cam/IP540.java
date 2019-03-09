@@ -1,21 +1,21 @@
-package tousatsu.cam.controller;
+package tousatsu.cam;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Base64;
 
-public class IP540Controller implements IWebCamController {
+public class IP540 implements IWebCamController {
 
-    public IP540Controller(boolean isHttps, String host, String username, String password) {
+    public IP540(boolean isHttps, String ip, String username, String password) {
         this.isHttps = isHttps;
-        this.host = host;
+        this.ip = ip;
         this.username = username;
         this.password = password;
     }
 
     private boolean isHttps;
-    private String host;
+    private String ip;
     private String username;
     private String password;
 
@@ -31,12 +31,12 @@ public class IP540Controller implements IWebCamController {
 
     private String moveUrl(String direction) {
         return String.format("http%s://%s/cgi-bin/view/cammove.cgi?move=%s",
-                this.isHttps ? "s" : "", this.host, direction);
+                this.isHttps ? "s" : "", this.ip, direction);
     }
 
     private String setSpeedUrl(int speed) {
         return String.format("http%s://%s/cgi-bin/view/ptzspeed.cgi?speed=%d",
-                this.isHttps ? "s" : "", this.host, speed);
+                this.isHttps ? "s" : "", this.ip, speed);
     }
 
     private void sendRequest(String url) throws IOException {
