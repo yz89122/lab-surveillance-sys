@@ -12,5 +12,3 @@ imgaug
 IPython[all]
 pycocotools
 -e git+https://github.com/matterport/Mask_RCNN#egg=Mask_RCNN
-ce072a8da5df05cf56b06d4a5b5dd4318ed6aae7
-f07341954725fc5d2cfb831dc2b91548c0fcaf5e
