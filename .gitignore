@@ -2,3 +2,4 @@
 /*.h5
 python
 config.json
+**/__pycache__/**
