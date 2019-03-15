@@ -1,8 +1,8 @@
 import cv2
 
 class StreamingFetcher:
-    def __init__(self, address):
-        self.url = 'rtsp://' + address + '/medias1'
+    def __init__(self, streaming_address):
+        self.url = 'rtsp://' + streaming_address + '/medias1'
         self.frame = None
         self.__video_capture = cv2.VideoCapture(self.url)
 

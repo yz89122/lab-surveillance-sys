@@ -19,11 +19,11 @@ class Controller:
     _AUTHORIZATION_HEADER = 'Basic {0}'
     _AUTHORIZATION_HEADER_BASE64_USERNAME_PASSWORD = '{username}:{password}'
 
-    def __init__(self, address, username, password):
-        self.connection = HTTPConnection(address)
-        self.address = address
-        self.username = username
-        self.password = password
+    def __init__(self, control_address, admin_username, admin_password):
+        self.connection = HTTPConnection(control_address)
+        self.address = control_address
+        self.username = admin_username
+        self.password = admin_password
 
     def __get_request(self, url):
         authorization_header = Controller._AUTHORIZATION_HEADER.format(base64.encodebytes(
