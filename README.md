@@ -42,3 +42,44 @@ python main.py
 ### Dev flow
 
 If you want to change something. Please open a new branch from branch `dev` and commit you changes at the new branch you just created. After finished all changes, make a pull request and set the target branch to `dev`, then wait for someone's approval.
+
+#### Clone this repo to local
+
+```bash
+git clone https://github.com/yanzhen0610/lab-surveillance-sys
+```
+
+#### Setup your username & email
+
+```bash
+git config user.name 'your name'
+git config user.email 'your email'
+```
+
+**Note:** The email address you used **MUST** as same as your github account
+
+#### Switch branch
+
+```bash
+git checkout dev
+```
+
+#### New branch
+
+```bash
+git checkout -b 'new-branch'
+```
+
+#### Commit your changes
+
+##### Add changed files to stage
+
+```bash
+git add changed_file.py
+```
+
+##### Commit
+
+```bash
+git commit -m 'what did you do?'
+```
