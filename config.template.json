@@ -1,0 +1,13 @@
+{
+    "cameras": [
+        {
+            "model": "ip540",
+            "control_address": "1.161.154.71:80",
+            "streaming_address": "1.161.154.71:554",
+            "admin_username": "admin",
+            "admin_password": "admin",
+            "detect_rate": 30
+        }
+    ],
+    "main_loop_per_second": 30
+}
