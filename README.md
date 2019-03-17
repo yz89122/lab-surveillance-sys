@@ -38,3 +38,7 @@ You need to make a `config.json` at project root in order to run it.
 ```bash
 python main.py
 ```
+
+### Dev flow
+
+If you want to change something. Please open a new branch from branch `dev` and commit you changes at the new branch you just created. After finished all changes, make a pull request and set the target branch to `dev`, then wait for someone's approval.
