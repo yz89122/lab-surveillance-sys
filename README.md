@@ -1,6 +1,6 @@
 # LAB
 
-## Dev
+## Dev Guides
 
 ### Packages
 
@@ -25,4 +25,16 @@ In Linux or Mac
 
 ```bash
 source python/bin/activate
+```
+
+### config
+
+The configuration file is located at /config.json. The template configuration file is at `config.templete.json`. The format of the file is JSON.
+
+### Run
+
+You need to make a `config.json` at project root in order to run it.
+
+```bash
+python main.py
 ```
