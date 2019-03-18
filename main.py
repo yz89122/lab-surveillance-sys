@@ -43,7 +43,7 @@ def main():
 
     for camera in cameras.values():
         detector = Detector()
-        runner = ClockedRunner(detect_loop, 1 / camera['config']['detect_rate'], kwargs={
+        runner = ClockedRunner(detect_loop, camera['config']['detect_rate'], kwargs={
             'context': context,
             'camera': camera,
             'detector': detector
