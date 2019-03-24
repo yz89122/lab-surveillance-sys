@@ -15,8 +15,7 @@ def start_image_fetchers_daemons(cameras):
 
 def detect_loop(context: Context, camera, detector: Detector):
     frame = camera['image_fetcher'].get_newest_frame()
-    x1,y1,x2,y2 = detector.getBox(frame)
-    result = [x1,y1,x2,y2]
+    result = detector.detect(frame)
     context.set_last_processed(camera['key'], frame, result)
 
 
@@ -42,13 +41,8 @@ def main():
     start_image_fetchers_daemons(cameras)
     context = Context(cameras)
 
-    model_path = './model/frozen_inference_graph.pb'
-    width = 1280
-    height = 720
-    threshold = 0.7
-
     for camera in cameras.values():
-        detector = Detector(model_path,width,height,30,threshold,(255,0,0),(255,255,48),True,True)
+        detector = Detector(**config.get_config()['detector'])
         runner = ClockedRunner(detect_loop, camera['config']['detect_rate'], kwargs={
             'context': context,
             'camera': camera,

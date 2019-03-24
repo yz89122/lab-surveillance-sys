@@ -9,5 +9,14 @@
             "detect_rate": 30
         }
     ],
+    "detector": {
+        "model_path": "",
+        "width": 1280,
+        "height": 720,
+        "err": 30,
+        "threshold": 0.7,
+        "color": [255, 0, 0],
+        "t_color": [255, 255, 48]
+    },
     "main_loop_per_second": 30
 }
