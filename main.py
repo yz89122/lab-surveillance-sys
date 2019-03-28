@@ -15,7 +15,7 @@ def start_image_fetchers_daemons(cameras):
 
 def detect_loop(context: Context, camera, detector: Detector):
     image_fetcher = camera['image_fetcher']
-    if image_fetcher.is_frame_update():
+    if image_fetcher.is_frame_updated():
         frame = image_fetcher.get_newest_frame()
         result = detector.detect(frame)
         context.set_last_processed(camera['key'], frame, result)
